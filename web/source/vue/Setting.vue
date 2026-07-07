@@ -306,7 +306,7 @@
           <SettingSwitch i18n="prusa.enable" v-model="config.PRUSA_ENABLE" />
           <div v-if="config.PRUSA_ENABLE === 'on'">
             <SettingInput i18n="prusa.url" :span="12" type="text" v-model="config.PRUSA_URL" />
-            <SettingInput i18n="prusa.token" :span="10" type="text" v-model="config.PRUSA_TOKEN" />
+            <SettingInput i18n="prusa.token" :span="10" type="password" v-model="config.PRUSA_TOKEN" show-password />
             <SettingInput i18n="prusa.fingerprint" :span="10" type="text" v-model="config.PRUSA_FINGERPRINT" />
             <SettingInputNumber i18n="prusa.interval" :span="3" v-model="config.PRUSA_INTERVAL" :min="2" :max="600" />
             <SettingSelect i18n="prusa.ch" v-model="config.PRUSA_CH" :label="['Main', 'Sub']" />
