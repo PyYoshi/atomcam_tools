@@ -353,6 +353,32 @@ event:
       tooltip: Notify when time lapse event ends
       comment: 'type: timelapseFinish'
 
+prusa:
+  tab: Prusa Connect
+  title: Prusa Connect Camera
+  enable:
+    title: Enable
+    tooltip: Upload snapshots to Prusa Connect periodically
+  url:
+    title: Upload URL
+    tooltip: Snapshot upload endpoint of the Prusa Connect Camera API
+  token:
+    title: Token
+    tooltip: Token issued by Prusa Connect when adding a new camera
+  fingerprint:
+    title: Fingerprint
+    tooltip: Persistent unique camera ID (16+ chars). If empty, it is generated automatically and stored on the SD card
+  interval:
+    title: Interval (sec)
+  ch:
+    title: Quality
+    text:
+      - High (Main)
+      - Low (Sub)
+  insecure:
+    title: Allow Insecure Access
+    tooltip: Allow insecure server connections when using TLS.
+
 cruise:
   tab: Cruise
   title: Cruise

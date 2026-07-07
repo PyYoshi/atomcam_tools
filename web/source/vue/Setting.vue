@@ -300,6 +300,20 @@
           <SettingSwitch i18n="event.webhook.endTimeLapse" v-model="config.WEBHOOK_TIMELAPSE_FINISH" />
         </ElTabPane>
 
+        <!-- Prusa Connect Tab -->
+        <ElTabPane name="prusa" class="well-transparent container" :label="$t('prusa.tab')">
+          <h3 v-t="'prusa.title'" />
+          <SettingSwitch i18n="prusa.enable" v-model="config.PRUSA_ENABLE" />
+          <div v-if="config.PRUSA_ENABLE === 'on'">
+            <SettingInput i18n="prusa.url" :span="12" type="text" v-model="config.PRUSA_URL" />
+            <SettingInput i18n="prusa.token" :span="10" type="password" v-model="config.PRUSA_TOKEN" show-password />
+            <SettingInput i18n="prusa.fingerprint" :span="10" type="text" v-model="config.PRUSA_FINGERPRINT" />
+            <SettingInputNumber i18n="prusa.interval" :span="3" v-model="config.PRUSA_INTERVAL" :min="2" :max="600" />
+            <SettingSelect i18n="prusa.ch" v-model="config.PRUSA_CH" :label="['Main', 'Sub']" />
+            <SettingSwitch i18n="prusa.insecure" v-model="config.PRUSA_INSECURE" />
+          </div>
+        </ElTabPane>
+
         <!-- Cruise Setting Tab -->
         <ElTabPane v-if="isSwing && posValid" name="cruise" class="well-transparent container" :label="$t('cruise.tab')">
           <h3 v-t="'cruise.title'" />
@@ -508,6 +522,13 @@
           WEBHOOK_TIMELAPSE_START: 'off',
           WEBHOOK_TIMELAPSE_EVENT: 'off',
           WEBHOOK_TIMELAPSE_FINISH: 'off',
+          PRUSA_ENABLE: 'off',
+          PRUSA_URL: 'https://webcam.connect.prusa3d.com/c/snapshot',
+          PRUSA_TOKEN: '',
+          PRUSA_FINGERPRINT: '',
+          PRUSA_INTERVAL: 10,
+          PRUSA_CH: 'Main',
+          PRUSA_INSECURE: 'off',
           CRUISE: 'off',
           CRUISE_LIST: '',
           MINIMIZE_ALARM_CYCLE: 'off',
@@ -1438,6 +1459,9 @@
         this.RTSPRestart = false;
         if(Object.keys(this.config).some(prop => (prop.search(/WEBHOOK/) === 0) && (this.config[prop] !== this.oldConfig[prop]))) {
           execCmds.push('setwebhook');
+        }
+        if(Object.keys(this.config).some(prop => (prop.search(/PRUSA/) === 0) && (this.config[prop] !== this.oldConfig[prop]))) {
+          execCmds.push('setPrusa');
         }
         if((this.config.CRUISE !== this.oldConfig.CRUISE) ||
            (this.config.CRUISE_LIST !== this.oldConfig.CRUISE_LIST)) {
