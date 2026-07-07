@@ -1,5 +1,7 @@
 # libcallback
 
+> フック機構の技術的な分類（symbol interposition・コードスキャン等）と全体設計は [`../docs/04-libcallback-injection.md`](../docs/04-libcallback-injection.md) を参照してください。本書は各モジュールのコマンド書式と hook point の辞書です。
+
 iCamera_appの起動時にLD_PRELOADで読み込ませることでdynamic linkされる前にlibcallbackのhook関数が読み込まれlinkされる。
 
 これによって内部で使用しているlibararyの関数を置き換えることができるが、libararyに出ていない関数は置き換えられないのでできることに限界はある。
