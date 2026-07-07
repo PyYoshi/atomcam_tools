@@ -37,6 +37,9 @@ fi
 INSECURE=""
 [ "$PRUSA_INSECURE" = "on" ] && INSECURE="-k"
 
+TMP=/tmp/prusa_snapshot.jpg
+mkdir -p /tmp/log
+
 # fingerprint must be a persistent unique id (16+ chars); generate once if not set
 FP_FILE=/media/mmc/.prusa_fingerprint
 if [ "$PRUSA_FINGERPRINT" = "" ]; then
@@ -44,13 +47,12 @@ if [ "$PRUSA_FINGERPRINT" = "" ]; then
     PRUSA_FINGERPRINT=$(cat $FP_FILE)
   else
     PRUSA_FINGERPRINT="$(hostname)-$(cat /proc/sys/kernel/random/uuid | tr -d '-' | cut -c1-16)"
-    echo "$PRUSA_FINGERPRINT" > $FP_FILE 2> /dev/null
+    if ! { echo "$PRUSA_FINGERPRINT" > $FP_FILE ; } 2> /dev/null; then
+      echo "$(date +"%Y/%m/%d %H:%M:%S") prusa: failed to persist fingerprint to $FP_FILE (will regenerate next boot)" >> /tmp/log/prusa.log
+    fi
   fi
 fi
 [ "$PRUSA_FINGERPRINT" = "" ] && exit 0
-
-TMP=/tmp/prusa_snapshot.jpg
-mkdir -p /tmp/log
 
 count=0
 while : ; do
