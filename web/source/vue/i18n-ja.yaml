@@ -352,6 +352,32 @@ event:
       tooltip: タイムラプス録画完了を通知します
       comment: 'type: timelapseFinish'
 
+prusa:
+  tab: Prusa Connect
+  title: Prusa Connect カメラ
+  enable:
+    title: 有効化
+    tooltip: スナップショットをPrusa Connectに定期アップロードします
+  url:
+    title: アップロードURL
+    tooltip: Prusa Connect Camera APIのスナップショットアップロード先URL
+  token:
+    title: トークン
+    tooltip: Prusa Connectでカメラ追加時に発行されるToken
+  fingerprint:
+    title: Fingerprint
+    tooltip: カメラを識別する16文字以上の固定ID。空欄の場合は自動生成してSDカードに保存します
+  interval:
+    title: 送信間隔(秒)
+  ch:
+    title: 画質
+    text:
+      - 高 (Main)
+      - 低 (Sub)
+  insecure:
+    title: 未認証接続許可
+    tooltip: TLS使用時に認証されていない証明書のサーバーへの接続を許可する
+
 cruise:
   tab: クルーズ設定
   title: クルーズ
