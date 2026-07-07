@@ -20,11 +20,18 @@ PRUSA_CH=$(read_ini PRUSA_CH)
 PRUSA_INSECURE=$(read_ini PRUSA_INSECURE)
 [ "$PRUSA_URL" = "" -o "$PRUSA_TOKEN" = "" ] && exit 0
 
-# interval must be a positive integer (WebUI min/max do not guard direct edits)
+# interval must be a positive integer within the WebUI range (2..600); direct
+# hack.ini edits bypass those limits, and busybox test errors on huge values
 case "$PRUSA_INTERVAL" in
   ''|*[!0-9]*) PRUSA_INTERVAL=10 ;;
 esac
-[ "$PRUSA_INTERVAL" -lt 2 ] && PRUSA_INTERVAL=2
+if [ ${#PRUSA_INTERVAL} -gt 3 ]; then
+  PRUSA_INTERVAL=600
+elif [ "$PRUSA_INTERVAL" -lt 2 ]; then
+  PRUSA_INTERVAL=2
+elif [ "$PRUSA_INTERVAL" -gt 600 ]; then
+  PRUSA_INTERVAL=600
+fi
 
 [ "$PRUSA_CH" = "Sub" ] && CH=1 || CH=0
 INSECURE=""
