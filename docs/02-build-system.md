@@ -12,7 +12,7 @@
 
 ビルドは Docker コンテナ内で完結する。ホスト側の入口は [`../Makefile`](../Makefile) の `build` ターゲット（macOS では事前に `make lima` で Lima VM を起動）。
 
-```
+```text
 make build
   └─ docker-compose exec builder /src/buildscripts/build_all   (Makefile:10)
 ```
@@ -63,7 +63,7 @@ flowchart TD
 
 [01. 全体アーキテクチャ](./01-architecture.md) で述べた「二重 libc」の実体がここにある。Buildroot 本体は glibc ツールチェインを生成するが、純正 `iCamera_app` は uClibc でビルドされているため、`libcallback.so` を注入するには **uClibc 版クロスコンパイラが別途必要**になる。
 
-```
+```text
 crosstool-ng 1.26.0 を configure/make/install
   └─ configs/crosstools_config を .config として ct-ng build
        └─ /atomtools/build/cross/mips-uclibc/bin/mipsel-ingenic-linux-uclibc-*

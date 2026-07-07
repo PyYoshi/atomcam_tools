@@ -90,7 +90,7 @@ asm volatile(
 );
 ```
 
-`alarm_config.c` では `memset` フック内で `$16`($s0) / `$17`($s1) を読み、テーブル初期化ループのインデックスから alarmConfig テーブル先頭を捕捉する。**代表**: `curl.c`, `alarm_config.c`。
+`alarm_config.c` では `memset` フック内で `$16`/`$17`（それぞれ `$s0`/`$s1`）を読み、テーブル初期化ループのインデックスから alarmConfig テーブル先頭を捕捉する。**代表**: `curl.c`, `alarm_config.c`。
 
 ### 技法④ /proc/maps + MIPS 命令パターンマッチで内部関数を発見（最高度）
 
