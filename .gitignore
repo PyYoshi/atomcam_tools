@@ -9,3 +9,6 @@ atomcam_tools.zip
 *.log
 bin/
 
+# oh-my-claudecode によるローカルセッション状態（コミット対象外）
+.omc/
+
