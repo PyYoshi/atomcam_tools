@@ -166,6 +166,8 @@ WyzeCamV3 Ver.4.36.9.139 （Experimental release)  4.36.10.xx以降のVer.では
 
 ## 関連記事
 
+開発者向けの設計文書（アーキテクチャ・ビルド・起動シーケンス・libcallback・WebUI）は [`docs/`](./docs/README.md) にまとめています。
+
 Qiitaに少し解説を書いています。
 
 [Qiita.com ATOMCam2を少し改造して導入してみた](https://qiita.com/mnakada/items/7d0fbcb6e629e1ddbd0c)
