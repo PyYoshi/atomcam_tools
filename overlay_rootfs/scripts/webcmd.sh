@@ -112,6 +112,12 @@ do
     echo "$cmd $params OK" >> /var/run/webres
     cmd=""
   fi
+  if [ "$cmd" = "setPrusa" ]; then
+    killall prusa.sh > /dev/null 2>&1
+    /scripts/prusa.sh &
+    echo "$cmd $params OK" >> /var/run/webres
+    cmd=""
+  fi
   if [ "$cmd" = "lighttpd" ]; then
     echo "$cmd OK" >> /var/run/webres
     sleep 3
